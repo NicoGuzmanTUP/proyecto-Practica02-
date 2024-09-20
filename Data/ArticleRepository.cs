@@ -37,7 +37,7 @@ namespace proyecto_Practica02_.Data.Implementations
                 string name = Convert.ToString(row["nombre"]);
                 double price = Convert.ToDouble(row["precio_unitario"]);                
                 string description = Convert.ToString(row["descripcion"]);
-                Article article = new Article(name, price, description);
+                Article article = new Article(name, id, price, description);
                 list.Add(article);
             }
             return list;
@@ -61,5 +61,52 @@ namespace proyecto_Practica02_.Data.Implementations
             }
             catch { return false; }
         }
+
+        public bool DeleteComponents(int id)
+        {
+            try
+            {
+                var parameters = new List<ParameterSQL>()
+                {
+                    new ParameterSQL("@id", id)
+                };
+
+                int rowsAffected = DataHelper.GetInstance().ExcuteSPDML("ELIMINAR_PRODUCTO", parameters);
+
+                return rowsAffected == 1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error eliminando el artículo: {ex.Message}");
+
+                return false;
+            }
+        }
+
+        public Article? GetByIdComponents(int id)
+        {
+            Article? oArticle = null;
+            var helper = DataHelper.GetInstance();
+
+            var parameters = new List<ParameterSQL>
+            {
+                new ParameterSQL("@id", id),
+            };
+
+            var table = helper.ExecuteSpQuery("BUSCAR_ARTICULO", parameters);
+            if(table.Rows.Count > 0) 
+            {
+                DataRow row = table.Rows[0];
+                oArticle = new Article() {
+                    Id = Convert.ToInt32(row["id_articulo"].ToString()),
+                    Name = row["nombre"].ToString(),
+                    Price = Convert.ToDouble(row["precio_unitario"].ToString()),
+                    Description = row["descripcion"].ToString()
+                };
+            }
+            
+            return oArticle;
+        }
+
     }
 }

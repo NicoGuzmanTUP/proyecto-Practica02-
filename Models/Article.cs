@@ -4,21 +4,21 @@ namespace proyecto_Practica02_.Models
 {
     public class Article
     {
-        //public int Id { get; set; }
+        public int Id { get; set; }
         public string? Name { get; set; }
         public double Price { get; set; }
         public string Description { get; set; }
         public Article()
         {
-            //Id = 0;
+            Id = 0;
             Name = string.Empty;
             Price = 0;
             Description = string.Empty;
         }
 
-        public Article( string name, double price, string description)
+        public Article( string name, int id ,double price, string description)
         {
-            //Id = id;
+            Id = id;
             Name = name;
             Price = price;
             Description = description;

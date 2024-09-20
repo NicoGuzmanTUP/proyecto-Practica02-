@@ -18,3 +18,18 @@ BEGIN
 INSERT INTO Articulos(nombre, precio_unitario, descripcion)
 VALUES(@nombre, @precio, @descripcion)
 END
+
+CREATE PROCEDURE ELIMINAR_PRODUCTO
+@id int
+AS
+BEGIN
+DELETE FROM Articulos WHERE id_articulo = @id
+END
+
+
+CREATE PROCEDURE BUSCAR_ARTICULO
+@id int
+AS
+BEGIN
+SELECT * FROM Articulos WHERE id_articulo = @id
+END

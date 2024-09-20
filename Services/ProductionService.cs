@@ -21,5 +21,20 @@ namespace proyecto_Practica02_.Services
         {
             return repository.GetComponents();
         }
+        public Article GetById(int id)
+        {
+            return repository.GetByIdComponents(id);
+        }
+
+        //public bool DeleteArticle(Article article)
+        //{
+        //    return repository.DeleteComponents(article);
+        //}
+        public bool DeleteArticle(int id)
+        {
+            return repository.DeleteComponents(id);
+        }
+
+        
     }
 }
